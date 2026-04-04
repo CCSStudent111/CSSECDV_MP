@@ -1,0 +1,17 @@
+<div id="profilebar" class="profilebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="toggleProfilebar()">&times;</a>
+    <div class="profileinfo">
+        {{#if user}}
+            <h2>{{user.username}}</h2>
+            <p>Email: {{user.email}}</p>
+            <p>Member since: {{user.joinDate}}</p>
+            <p>Posts: {{user.posts}}</p>
+            <p>Comments: {{user.comments}}</p>
+            <p><a href="/logout">Logout</a></p>
+        {{else}}
+            <h2>Not Logged In</h2>
+            <p><a href="/login">Login</a></p>
+            <p><a href="/register">Register</a></p>
+        {{/if}}
+    </div>
+</div>

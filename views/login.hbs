@@ -1,0 +1,21 @@
+
+{{!< layout "loginLayout" }}
+<link rel="stylesheet" href="..\css\logstyles.css">
+<div id="login" class="login">
+    <div class="contentpane">
+        <h3> DLSU Forum </h3>
+        <h2>Login</h2>
+        <form action="/login" method="post">
+            <input class="input-details" type="text" name="username" placeholder="Enter username" > 
+            <input class="input-details" type="password" name="password" placeholder="Enter password" > 
+            <div class="rememberme">
+                <input class="input-rememberme" type="checkbox" name="rememberme">
+                <label for="rememberme">Remember me</label>
+            </div>
+            <div class="login">
+                <a href="/register"> Don't have an account yet? Create an account </a> 
+            </div>
+            <button type="submit" class="button">Login</button>
+        </form>
+    </div>
+</div>

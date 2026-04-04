@@ -1,0 +1,515 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    color: black;
+}
+
+/* sticky navbar */
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: green;
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000; 
+}
+
+
+.navbar .logo {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+.navbar .navlinks {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.navbar .navlinks li {
+    margin-left: 20px;
+}
+
+.navbar .navlinks a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.navbar .navlinks a:hover {
+    color: #ddd;
+}
+
+.navbar .searchbar {
+    margin: 0 10px;
+}
+
+.navbar .searchbar input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+/* sidebar */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #1f1f1f;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 90px;
+    z-index: 999;
+}
+
+
+.sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.sidebar p {
+    padding-left: 8px;
+    color: white;
+    font-size: 30px;
+    font-style: bold;
+}
+
+/* categories bar */
+
+.categoriesbar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: orange;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    z-index: 999;
+}
+
+.categoriesbar .categoriesinfo {
+    padding-left: 20px;
+}
+
+.categoriesbar .categoriesinfo h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.categoriesbar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.categoriesbar .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.categoriesbar a:hover {
+    color: #ddd;
+}
+
+/* members bar */
+
+.membersbar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: orange;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.membersbar .membersinfo {
+    padding-left: 20px;
+}
+
+.membersbar .membersinfo h2 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.membersbar p {
+    color: white;
+    padding-left: 8px;
+    font-size: 30px;
+    font-style: bold;
+}
+
+.membersbar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.membersbar a:hover {
+    color: #ddd;
+}
+
+.membersbar .closebtn {
+    position: absolute;
+    top: 0;
+    left: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* profile bar */
+
+.profilebar {
+    height: 100%;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    width: 0;
+    position: fixed;
+    background-color: orange;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.profilebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.profilebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+.profilebar p {
+    padding-left: 8px;
+    font-size: 30px;
+    font-style: bold;
+}
+
+.profilebar .profileinfo {
+    padding: 20px;
+    color: white;
+}
+
+.profilebar .profileinfo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 60%; /* thanks w3schools*/
+    margin-bottom: 8px;
+}
+
+.profilebar .profileifo {
+    margin: 0;
+    font-size: 24px;
+}
+
+.profilebar .profileinfo p {
+    margin: 5px 0;
+    font-size: 16px
+}
+
+.openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: goldenrod;
+    color: white;
+    padding: 8px 15px;
+    position: fixed;
+    border: none;
+}
+
+
+
+/* poll options container & individuals */
+
+.poll-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.poll-option {
+    background-color: goldenrod;
+    color: white;
+    width: 20%;
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.poll-option:hover {
+    background-color: #d4a100;
+}
+
+.poll-option:active {
+    background-color: #b38c00;
+}
+
+/* poll results container & individuals */
+
+.poll-results .results-content {
+    display: none;
+    margin-top: 10px;
+}
+
+.poll-results .toggle-results {
+    background-color: red;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.poll-results .toggle-results:hover {
+    background-color: #b30000;
+}
+
+.poll-results .results-content p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #333;
+}
+
+/* main content */
+
+#main {
+    transition: margin-left .5s;
+    padding: 16px;
+}
+
+
+.content {
+    padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #faf7f7;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(21, 19, 19, 0.1);
+    margin-top: 20px;
+}
+
+.content h1 {
+    margin-top: 0;
+}
+
+.content p {
+    line-height: 1.6;
+}
+
+.content img{
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.interaction-buttons{
+    margin-top: 15px;
+}
+
+.interaction-buttons button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 7px 17px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.tags {
+    margin: 10px 0;
+}
+
+.tags span {
+    display: inline-block;
+    background-color: red;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 12px;
+}
+
+.comments {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.comments p {
+    margin: 5px 0;
+    padding: 5px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.commentbox {
+    display : none;
+    margin-top: 10px;
+}
+
+.commentbox textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid grey;
+    resize: vertical;
+}
+
+.commentbox button {
+    margin-top: 10px;
+    background-color: orangered;
+    color: white;
+    padding: 7px 17px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.createpost {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #61f966;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.createpost:hover {
+    background-color: #317034;
+}
+
+.createpostbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999 /*should always be on top*/   } 
+
+.createpostcontent {
+    background: white;
+    padding: 20px;
+    width: 50%;
+    display: flex;
+    border-radius: 15px;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.createpostcontent input{
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #010000;
+    border-radius: 5px;
+}
+
+.createpostcontent textarea{
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #0d0b0b;
+    border-radius: 5px;
+    height: 150px;
+    resize: vertical;
+}
+
+.createpostcontent select {
+    width: 100%;
+    padding: 3px;
+    border: 1px solid #0e0909;
+    border-radius: 5px;
+}
+
+.createpostcontent .submitpost {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.createpostcontent .submitpost:hover {
+background-color: #45a049;
+}
+
+.createpostcontent .closebtn {
+    font-size: 24px;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.vote-counter {
+    margin: 0 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.like.active-like {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.dislike.active-dislike {
+    background-color: #f44336;
+    color: white;
+}

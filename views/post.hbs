@@ -1,0 +1,51 @@
+<div class="content">
+    <h1>{{post.title}}</h1>
+    <p><strong>by:</strong> {{post.author}}</p>
+    
+    {{#if post.imageUrl}}
+    <img src="{{post.imageUrl}}" alt="Post Image">
+    {{/if}}
+    
+    <p class="post-content">{{post.content}}</p>
+    
+    <div class="tags">
+        {{#each post.tags}}
+        <span>{{this}}</span>
+        {{/each}}
+    </div>
+
+    <div class="interaction-buttons">
+        <button class="like" onclick="handleLike('{{post._id}}')">Like</button>
+        <button class="dislike" onclick="handleDislike('{{post._id}}')">Dislike</button>    
+        <span class="vote-counter">{{post.likes}}</span>
+        <button class="comment" onclick="toggleCommentbox(this)">Comment</button>
+        <button class="edit-post" onclick="editPost('{{post._id}}')">Edit Post</button>
+        <button class="delete-post" onclick="deletePost('{{post._id}}')">Delete Post</button>
+    </div>
+
+    <div class="commentbox">
+        <form action="/comment/add" method="post">
+            <input type="hidden" name="postId" value="{{post._id}}">
+            <textarea name="content" placeholder="Write a comment..."></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="comments">
+    {{#each comments}}
+    <div class="comment-item" data-comment-id="{{this._id}}">
+        <p><strong>{{this.author}}:</strong> <span class="comment-content">{{this.content}}</span></p>
+        <div class="comment-actions">
+            <button class="edit-comment" onclick="editComment('{{this._id}}')">Edit</button>
+            <button class="delete-comment" onclick="deleteComment('{{this._id}}')">Delete</button>
+        </div>
+        <div class="edit-comment-box" style="display: none;">
+            <textarea class="edit-comment-textarea">{{this.content}}</textarea>
+            <button onclick="saveComment('{{this._id}}')">Save</button>
+            <button onclick="cancelEdit('{{this._id}}')">Cancel</button>
+        </div>
+    </div>
+    {{/each}}
+</div>
+
+</div>
