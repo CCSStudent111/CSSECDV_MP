@@ -73,10 +73,6 @@ app.use((req, res, next) => {
 });
 
 // ===== PUBLIC ROUTES (no auth required) =====
-<<<<<<< Updated upstream
-app.get('/login', (req, res) => res.render('login', { title: 'Login', layout: 'loginLayout' }));
-app.get('/register', (req, res) => res.render('register', { title: 'Register', layout: 'loginLayout' }));
-=======
 app.get('/login', (req, res) => {
     if (req.session && req.session.user) {
         return res.redirect('/');
@@ -89,20 +85,13 @@ app.get('/register', (req, res) => {
     }
     res.render('register', { title: 'Register', layout: 'loginLayout' });
 });
->>>>>>> Stashed changes
 app.post('/login', profileController.login);
 app.post('/register', profileController.register);
 
 // ===== AUTHENTICATED ROUTES =====
-<<<<<<< Updated upstream
-app.get('/', postController.viewallPost);
-app.get('/logout', profileController.logout);
-app.get('/post/:id', postController.getpostID);
-=======
 app.get('/', requireAuth, postController.viewallPost);
 app.get('/logout', requireAuth, profileController.logout);
 app.get('/post/:id', requireAuth, postController.getpostID);
->>>>>>> Stashed changes
 
 // Post routes (require auth)
 app.post('/post/create', requireAuth, postController.createPost);
@@ -128,13 +117,10 @@ app.post('/admin/user/delete/:id', requireAuth, requireRole(ROLES.ADMIN), adminC
 app.post('/admin/user/role/:id', requireAuth, requireRole(ROLES.ADMIN), adminController.changeUserRole);
 app.get('/admin/logs', requireAuth, requireRole(ROLES.ADMIN), adminController.viewLogs);
 
-<<<<<<< Updated upstream
-=======
 // ===== MANAGER ROUTES (manager only) =====
 app.get('/manager', requireAuth, requireRole(ROLES.MANAGER), managerController.dashboard);
 app.post('/manager/post/delete/:id', requireAuth, requireRole(ROLES.MANAGER), managerController.deletePost);
 
->>>>>>> Stashed changes
 // Middleware to protect routes (ensure the user is authenticated)
 function authenticateSession(req, res, next) {
     if (!req.session.user) {

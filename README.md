@@ -51,10 +51,7 @@ These are not final yet, and subject to change as such.
 ### 1. Install Prerequisites
 - **MongoDB Shell/Compasss**
 - **NodeJS & Modules**:
-<<<<<<< Updated upstream
-=======
   - express
->>>>>>> Stashed changes
   - mongodb
   - express-session
   - express-flash, connect-flash
