@@ -1,0 +1,104 @@
+<div class="admin-header">
+    <h1>Audit Logs</h1>
+    <p>Total entries: {{totalCount}}</p>
+</div>
+
+<!-- Filter Section -->
+<div class="admin-section">
+    <h2>Filters</h2>
+    <form action="/admin/logs" method="get" class="filter-form">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="action">Action Type</label>
+                <select id="action" name="action">
+                    <option value="">All Actions</option>
+                    <option value="LOGIN_SUCCESS" {{#if (eq filters.action "LOGIN_SUCCESS")}}selected{{/if}}>Login Success</option>
+                    <option value="LOGIN_FAILURE" {{#if (eq filters.action "LOGIN_FAILURE")}}selected{{/if}}>Login Failure</option>
+                    <option value="LOGOUT" {{#if (eq filters.action "LOGOUT")}}selected{{/if}}>Logout</option>
+                    <option value="REGISTER" {{#if (eq filters.action "REGISTER")}}selected{{/if}}>Register</option>
+                    <option value="POST_CREATE" {{#if (eq filters.action "POST_CREATE")}}selected{{/if}}>Post Create</option>
+                    <option value="POST_UPDATE" {{#if (eq filters.action "POST_UPDATE")}}selected{{/if}}>Post Update</option>
+                    <option value="POST_DELETE" {{#if (eq filters.action "POST_DELETE")}}selected{{/if}}>Post Delete</option>
+                    <option value="COMMENT_CREATE" {{#if (eq filters.action "COMMENT_CREATE")}}selected{{/if}}>Comment Create</option>
+                    <option value="COMMENT_DELETE" {{#if (eq filters.action "COMMENT_DELETE")}}selected{{/if}}>Comment Delete</option>
+                    <option value="USER_CREATE" {{#if (eq filters.action "USER_CREATE")}}selected{{/if}}>User Create</option>
+                    <option value="USER_DELETE" {{#if (eq filters.action "USER_DELETE")}}selected{{/if}}>User Delete</option>
+                    <option value="USER_ROLE_CHANGE" {{#if (eq filters.action "USER_ROLE_CHANGE")}}selected{{/if}}>Role Change</option>
+                    <option value="PASSWORD_CHANGE" {{#if (eq filters.action "PASSWORD_CHANGE")}}selected{{/if}}>Password Change</option>
+                    <option value="ACCESS_DENIED" {{#if (eq filters.action "ACCESS_DENIED")}}selected{{/if}}>Access Denied</option>
+                    <option value="ACCOUNT_LOCKED" {{#if (eq filters.action "ACCOUNT_LOCKED")}}selected{{/if}}>Account Locked</option>
+                    <option value="VALIDATION_FAILURE" {{#if (eq filters.action "VALIDATION_FAILURE")}}selected{{/if}}>Validation Failure</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" value="{{filters.username}}" placeholder="Filter by username">
+            </div>
+            <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="date" id="startDate" name="startDate" value="{{filters.startDate}}">
+            </div>
+            <div class="form-group">
+                <label for="endDate">End Date</label>
+                <input type="date" id="endDate" name="endDate" value="{{filters.endDate}}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Apply Filters</button>
+        <a href="/admin/logs" class="btn btn-secondary">Clear Filters</a>
+    </form>
+</div>
+
+<!-- Logs Table -->
+<div class="admin-section">
+    <table class="admin-table logs-table">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Role</th>
+                <th>Action</th>
+                <th>Details</th>
+                <th>IP</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each logs}}
+            <tr class="{{#if this.success}}log-success{{else}}log-failure{{/if}}">
+                <td class="timestamp">{{this.timestamp}}</td>
+                <td>{{this.username}}</td>
+                <td>{{this.role}}</td>
+                <td><span class="action-badge">{{this.action}}</span></td>
+                <td class="details-cell">
+                    {{#each this.details}}
+                    <span class="detail-item">{{@key}}: {{this}}</span>
+                    {{/each}}
+                </td>
+                <td>{{this.ip}}</td>
+                <td>
+                    {{#if this.success}}
+                    <span class="status-badge status-active">OK</span>
+                    {{else}}
+                    <span class="status-badge status-locked">FAIL</span>
+                    {{/if}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<!-- Pagination -->
+{{#if (gt totalPages 1)}}
+<div class="pagination">
+    {{#if (gt currentPage 1)}}
+    <a href="/admin/logs?page={{subtract currentPage 1}}&action={{filters.action}}&username={{filters.username}}&startDate={{filters.startDate}}&endDate={{filters.endDate}}" class="btn btn-sm btn-secondary">&laquo; Previous</a>
+    {{/if}}
+    
+    <span class="page-info">Page {{currentPage}} of {{totalPages}}</span>
+    
+    {{#if (lt currentPage totalPages)}}
+    <a href="/admin/logs?page={{add currentPage 1}}&action={{filters.action}}&username={{filters.username}}&startDate={{filters.startDate}}&endDate={{filters.endDate}}" class="btn btn-sm btn-secondary">Next &raquo;</a>
+    {{/if}}
+</div>
+{{/if}}

@@ -8,5 +8,11 @@
         <li><a href="javascript:void(0)" onclick="toggleCategoriesbar()">Categories</a></li>
         <li><a href="javascript:void(0)" onclick="toggleMembersbar()">Members</a></li>
         <li><a href="javascript:void(0)" onclick="toggleProfilebar()">Profile</a></li>
+        {{#if currentUser}}
+            {{#if (eq currentUser.role "admin")}}
+            <li><a href="/admin" style="color: #ff6b6b; font-weight: bold;">Admin Panel</a></li>
+            {{/if}}
+            <li><a href="/change-password">Change Password</a></li>
+        {{/if}}
     </ul>
 </nav>

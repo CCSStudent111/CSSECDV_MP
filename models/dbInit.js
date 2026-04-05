@@ -7,14 +7,17 @@ const databaseName = "forumdb";
 const usersCollection = "users";
 const postsCollection = "posts";
 const commentsCollection = "comments";
+const auditLogsCollection = "audit_logs";
 
-// Sample data
+// Sample data with roles
 const sampleUsers = [
-    { username: "Anime_Girl79", password: "kiritolover", email: "anime@example.com", joinDate: new Date(), posts: 2, comments: 3 },
-    { username: "Brainrot", password: "ohiorizzler45", email: "brain@example.com", joinDate: new Date(), posts: 1, comments: 1 },
-    { username: "Hater", password: "noluv4u", email: "hater@example.com", joinDate: new Date(), posts: 0, comments: 5 },
-    { username: "Randymarsh", password: "southpark123", email: "randy@example.com", joinDate: new Date(), posts: 3, comments: 2 },
-    { username: "Skibidi", password: "wh4tth3s1gma", email: "skibidi@example.com", joinDate: new Date(), posts: 0, comments: 0 }
+    { username: "Admin", password: "Admin@12345", email: "admin@forum.com", role: "admin", joinDate: new Date(), posts: 0, comments: 0, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] },
+    { username: "Manager1", password: "Manager@12345", email: "manager@forum.com", role: "manager", joinDate: new Date(), posts: 0, comments: 0, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] },
+    { username: "Anime_Girl79", password: "Anime@Girl79", email: "anime@example.com", role: "customer", joinDate: new Date(), posts: 2, comments: 3, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] },
+    { username: "Brainrot", password: "Brainrot@45", email: "brain@example.com", role: "customer", joinDate: new Date(), posts: 1, comments: 1, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] },
+    { username: "Hater", password: "Hater@1234", email: "hater@example.com", role: "customer", joinDate: new Date(), posts: 0, comments: 5, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] },
+    { username: "Randymarsh", password: "Randy@marsh1", email: "randy@example.com", role: "customer", joinDate: new Date(), posts: 3, comments: 2, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] },
+    { username: "Skibidi", password: "Skibidi@123", email: "skibidi@example.com", role: "customer", joinDate: new Date(), posts: 0, comments: 0, status: "active", failedLoginAttempts: 0, lockUntil: null, lastLogin: null, passwordChangedAt: new Date(), previousPasswords: [] }
 ];
 
 const samplePosts = [
@@ -108,46 +111,24 @@ const sampleComments = [
     }
 ];
 
-// async function initializeDatabase() {
-//     try {
-//         const conn = await client.connect();
-//         console.log('Connected to MongoDB at ' + dURL);
-        
-//         const db = client.db(databaseName);
-    
-//         await db.createCollection(usersCollection);
-//         await db.createCollection(postsCollection);
-//         await db.createCollection(commentsCollection);
-        
-//         await db.collection(usersCollection).deleteMany({});
-//         await db.collection(postsCollection).deleteMany({});
-//         await db.collection(commentsCollection).deleteMany({});
-    
-//         const usersResult = await db.collection(usersCollection).insertMany(sampleUsers);
-//         const postsResult = await db.collection(postsCollection).insertMany(samplePosts);
-//         const postIds = Object.values(postsResult.insertedIds);
-        
-//         sampleComments[0].postId = postIds[0].toString();
-//         sampleComments[1].postId = postIds[0].toString();
-//         sampleComments[2].postId = postIds[1].toString();
-//         sampleComments[3].postId = postIds[2].toString();
-//         sampleComments[4].postId = postIds[4].toString();
-        
-//         const commentsResult = await db.collection(commentsCollection).insertMany(sampleComments);
-        
-//     } catch (error) {
-//         console.error('Error initializing the database:', error);
-//     } finally {
-//         await client.close();
-//     }
-// }
-
 async function initializeDatabase() {
     try {
         const conn = await client.connect();
         console.log('Connected to MongoDB at ' + dURL);
         
         const db = client.db(databaseName);
+
+        // Ensure collections exist
+        const collections = await db.listCollections().toArray();
+        const collectionNames = collections.map(c => c.name);
+        
+        if (!collectionNames.includes(auditLogsCollection)) {
+            await db.createCollection(auditLogsCollection);
+            // Create index for faster log queries
+            await db.collection(auditLogsCollection).createIndex({ timestamp: -1 });
+            await db.collection(auditLogsCollection).createIndex({ action: 1 });
+            console.log('Created audit_logs collection with indexes');
+        }
 
         // Check if collections are empty before inserting sample data
         const usersCount = await db.collection(usersCollection).countDocuments();
@@ -157,12 +138,12 @@ async function initializeDatabase() {
         if (usersCount === 0) {
             const hashedUsers = await hashPasswords(sampleUsers);
             await db.collection(usersCollection).insertMany(hashedUsers);
+            console.log('Inserted sample users (with roles: admin, manager, customer)');
         }
         if (postsCount === 0) {
             const postsResult = await db.collection(postsCollection).insertMany(samplePosts);
             const postIds = Object.values(postsResult.insertedIds);
 
-            // Update sample comments with post IDs
             sampleComments[0].postId = postIds[0].toString();
             sampleComments[1].postId = postIds[0].toString();
             sampleComments[2].postId = postIds[1].toString();
@@ -172,7 +153,21 @@ async function initializeDatabase() {
             if (commentsCount === 0) {
                 await db.collection(commentsCollection).insertMany(sampleComments);
             }
+            console.log('Inserted sample posts and comments');
         }
+
+        // Log initial seed event
+        await db.collection(auditLogsCollection).insertOne({
+            timestamp: new Date(),
+            userId: null,
+            username: 'SYSTEM',
+            role: 'system',
+            action: 'SYSTEM_INIT',
+            details: { message: 'Database initialized' },
+            ip: '127.0.0.1',
+            success: true
+        });
+
     } catch (error) {
         console.error('Error initializing the database:', error);
     } finally {

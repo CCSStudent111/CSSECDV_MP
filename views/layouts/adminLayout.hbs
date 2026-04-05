@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="/js/admin.js" defer></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">DLSU FORUM - ADMIN</div>
+        <ul class="navlinks">
+            <li><a href="/">Home</a></li>
+            <li><a href="/admin">Dashboard</a></li>
+            <li><a href="/admin/logs">Audit Logs</a></li>
+            <li><a href="/change-password">Change Password</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="admin-container">
+        {{{body}}}
+    </div>
+</body>
+</html>

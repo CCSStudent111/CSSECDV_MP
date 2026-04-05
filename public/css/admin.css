@@ -1,0 +1,302 @@
+/* Admin Dashboard Styles */
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid green;
+}
+
+.admin-header h1 {
+    margin: 0;
+    color: #333;
+}
+
+.admin-header p {
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+/* Sections */
+.admin-section {
+    background: #faf7f7;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.admin-section h2 {
+    margin-top: 0;
+    color: #333;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+/* Forms */
+.admin-form .form-row,
+.filter-form .form-row {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.admin-form .form-group,
+.filter-form .form-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.admin-form label,
+.filter-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.admin-form input,
+.admin-form select,
+.filter-form input,
+.filter-form select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.admin-form small {
+    color: #888;
+    font-size: 12px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    text-decoration: none;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #4CAF50;
+}
+.btn-primary:hover {
+    background-color: #45a049;
+}
+
+.btn-secondary {
+    background-color: #666;
+}
+.btn-secondary:hover {
+    background-color: #555;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+}
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 12px;
+}
+
+/* Table */
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.admin-table th,
+.admin-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.admin-table th {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+}
+
+.admin-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Role badges */
+.role-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
+}
+
+.role-admin {
+    background-color: #e74c3c;
+}
+
+.role-manager {
+    background-color: #f39c12;
+}
+
+.role-customer {
+    background-color: #3498db;
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+
+.status-active {
+    background-color: #27ae60;
+}
+
+.status-locked {
+    background-color: #e74c3c;
+}
+
+.status-disabled {
+    background-color: #95a5a6;
+}
+
+/* Action badges for logs */
+.action-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    background-color: #34495e;
+    color: white;
+    border-radius: 3px;
+    font-size: 11px;
+    font-family: monospace;
+}
+
+/* Log table specifics */
+.logs-table .timestamp {
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.log-failure {
+    background-color: #ffeaea !important;
+}
+
+.log-success {
+    background-color: transparent;
+}
+
+.details-cell {
+    max-width: 250px;
+    overflow: hidden;
+}
+
+.detail-item {
+    display: inline-block;
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 11px;
+    margin: 1px;
+}
+
+/* Actions cell */
+.actions-cell {
+    white-space: nowrap;
+}
+
+.inline-form {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-right: 5px;
+}
+
+.role-select {
+    padding: 3px;
+    font-size: 12px;
+    width: auto !important;
+}
+
+/* Alerts */
+.alert {
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.alert-error {
+    background-color: #ffeaea;
+    color: #c0392b;
+    border: 1px solid #e74c3c;
+}
+
+.alert-success {
+    background-color: #eafaf1;
+    color: #27ae60;
+    border: 1px solid #27ae60;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.page-info {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Form group for change password page */
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group small {
+    color: #888;
+    font-size: 12px;
+}
