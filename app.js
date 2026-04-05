@@ -34,10 +34,7 @@ const profileController = require('./controllers/profileController');
 const postController = require('./controllers/postController');
 const commentController = require('./controllers/commentController');
 const adminController = require('./controllers/adminController');
-<<<<<<< Updated upstream
-=======
 const managerController = require('./controllers/managerController');
->>>>>>> Stashed changes
 
 // Handlebars setup with helpers
 const hbs = exphbs.create({
