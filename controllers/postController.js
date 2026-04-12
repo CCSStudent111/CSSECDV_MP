@@ -79,6 +79,16 @@ async function createPost(req, res) {
         if (content.length > 10000) {
             return res.redirect('/?error=Content too long');
         }
+        const allowedCategories = ['text', 'image', 'poll'];
+        if (category && !allowedCategories.includes(category)) {
+            await auditModel.logEvent({
+                userId: currentUser._id, username: currentUser.username, role: currentUser.role,
+                action: auditModel.ACTIONS.VALIDATION_FAILURE,
+                details: { reason: 'Invalid category value', value: category },
+                ip: req.ip, success: false
+            });
+            return res.redirect('/?error=Invalid category selected');
+        }
 
         const Post = await postModel.createPost({
             title,

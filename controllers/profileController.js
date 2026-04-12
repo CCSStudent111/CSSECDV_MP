@@ -109,8 +109,8 @@ async function login(req, res) {
 // User registration (customers only via public form)
 async function register(req, res) {
     try {
-        const { email, password, username } = req.body;
-        const plainPassword = Array.isArray(password) ? password[0] : String(password);
+        const { email, password, confirmPassword, username } = req.body;
+        const plainPassword = String(password);
 
         // Validate input
         if (!email || !plainPassword || !username) {
@@ -123,6 +123,14 @@ async function register(req, res) {
             return res.render('register', {
                 title: 'Register', layout: 'loginLayout',
                 error: 'All fields are required.'
+            });
+        }
+
+        // Check passwords match
+        if (plainPassword !== confirmPassword) {
+            return res.render('register', {
+                title: 'Register', layout: 'loginLayout',
+                error: 'Passwords do not match.'
             });
         }
 

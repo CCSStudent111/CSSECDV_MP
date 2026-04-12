@@ -17,6 +17,9 @@
             {{#if (eq user.role "admin")}}
             <p><a href="/admin" style="color: #ff6b6b;">Admin Panel</a></p>
             {{/if}}
+            {{#if (eq user.role "manager")}}
+            <p><a href="/manager" style="color: #f39c12;">Manager Panel</a></p>
+            {{/if}}
             <p><a href="/logout">Logout</a></p>
         {{else}}
             <h2>Not Logged In</h2>

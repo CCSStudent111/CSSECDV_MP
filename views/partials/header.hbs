@@ -12,6 +12,9 @@
             {{#if (eq currentUser.role "admin")}}
             <li><a href="/admin" style="color: #ff6b6b; font-weight: bold;">Admin Panel</a></li>
             {{/if}}
+            {{#if (eq currentUser.role "manager")}}
+            <li><a href="/manager" style="color: #f39c12; font-weight: bold;">Manager Panel</a></li>
+            {{/if}}
             <li><a href="/change-password">Change Password</a></li>
         {{/if}}
     </ul>

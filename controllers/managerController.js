@@ -263,6 +263,8 @@ async function deletePost(req, res) {
             details: { deletedPostId: postId, deletedPostTitle: targetPost.title },
             ip: req.ip, success: true
         });
+
+        res.redirect('/manager?success=Post deleted');
     } catch (error) {
         console.error('Delete post error:', error);
         res.status(500).render('error', { title: 'Error', message: 'Failed to delete post.', layout: 'main' });

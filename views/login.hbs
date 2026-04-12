@@ -5,6 +5,12 @@
     <div class="contentpane">
         <h3> DLSU Forum </h3>
         <h2>Login</h2>
+        {{#if error}}
+            <div class="alert alert-error">{{error}}</div>
+        {{/if}}
+        {{#if success}}
+            <div class="alert alert-success">{{success}}</div>
+        {{/if}}
         <form action="/login" method="post">
             <input class="input-details" type="text" name="username" placeholder="Enter username" > 
             <input class="input-details" type="password" name="password" placeholder="Enter password" > 

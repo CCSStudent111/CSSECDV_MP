@@ -94,8 +94,8 @@ app.get('/post/:id', requireAuth, postController.getpostID);
 app.post('/post/create', requireAuth, postController.createPost);
 app.post('/post/update/:id', requireAuth, postController.updatePost);
 app.post('/post/delete/:id', requireAuth, postController.deletePost);
-app.post('/post/like/:id', postController.likePost);
-app.post('/post/dislike/:id', postController.dislikePost);
+app.post('/post/like/:id', requireAuth, postController.likePost);
+app.post('/post/dislike/:id', requireAuth, postController.dislikePost);
 app.get('/post/edit/:id', requireAuth, postController.editPost);
 
 // Comment routes (require auth)
